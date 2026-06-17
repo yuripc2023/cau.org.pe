@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.atic.pe/sitemap.xml
+Sitemap: https://cau-ucayali.org/sitemap.xml
