@@ -1,4 +1,4 @@
-# Mapeo de cau-ucayali.org
+# Mapeo de cau.org.pe
 
 Revisión realizada el 15 de junio de 2026 sobre las páginas públicas del
 Colegio de Abogados de Ucayali.
@@ -133,9 +133,10 @@ de la navegación pública: `/elementor-4053/`, `/pagina/`, `/prueba-nombre/`,
 
 ## Enlaces externos
 
-- Intranet: `https://cau-ucayali.org.pe/intranet/login.php`
-- Biblioteca: `https://cau-ucayali.org.pe/biblioteca/`
-- Aula virtual: `https://cau-ucayali.org.pe/aula/login/index.php`
+- Sistema: `https://aplicativo.cau.org.pe/`
+- Consulta de habilidad: `https://aplicativo.cau.org.pe/consulta-habilidad/20199186290`
+- Biblioteca: pendiente de nuevo enlace.
+- Aula virtual: pendiente de nuevo enlace.
 
 ## Problemas globales a corregir
 
@@ -169,4 +170,3 @@ assets/
     junta-directiva/
     colegiatura/
 ```
-

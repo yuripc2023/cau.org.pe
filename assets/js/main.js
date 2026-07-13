@@ -46,9 +46,10 @@
               ${navItem("publicaciones.html", "Publicaciones", "publicaciones")}
               ${dropdown("Enlaces", "enlaces", [
                 { href: "enlaces.html", label: "Enlaces de interés", key: "enlaces" },
-                { href: "https://cau-ucayali.org.pe/intranet/login.php", label: "Intranet", key: "" },
-                { href: "https://cau-ucayali.org.pe/biblioteca/", label: "Biblioteca", key: "" },
-                { href: "https://cau-ucayali.org.pe/aula/login/index.php", label: "Aula virtual", key: "" }
+                { href: "https://aplicativo.cau.org.pe/", label: "Sistema", key: "" },
+                { href: "https://aplicativo.cau.org.pe/consulta-habilidad/20199186290", label: "Consulta de Habilidad", key: "" },
+                { href: "#", label: "Biblioteca", key: "" },
+                { href: "#", label: "Aula virtual", key: "" }
               ])}
               ${navItem("contactenos.html", "Contacto", "contacto")}
             </ul>
