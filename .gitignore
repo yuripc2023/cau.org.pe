@@ -1,0 +1,42 @@
+# Credenciales y configuracion local
+.env
+.env.*
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+id_rsa
+id_rsa.pub
+credentials
+config.local
+*.local
+
+# Archivos internos de herramientas
+.agents/
+.codex/
+.vscode/
+.idea/
+
+# Dependencias y artefactos de build
+node_modules/
+dist/
+build/
+
+# Logs y temporales
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+tmp/
+temp/
+.cache/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# deploy
+
+deploy.sh
