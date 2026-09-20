@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es-PE">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculadora de Costos Arbitrales | Colegio de Abogados de Ucayali</title>
+  <meta name="description" content="Calculadora referencial de costos arbitrales del Centro de Arbitraje del Colegio de Abogados de Ucayali.">
+  <link rel="icon" href="assets/img/cau/favicon.png">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script src="assets/js/jspdf.umd.min.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body data-page="arbitraje">
+  <div data-site-header></div>
+  <main id="main-content">
+    <header class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Migas de pan"><a href="index.html">Inicio</a><span>/</span><a href="centro-de-arbitraje.html">Centro de Arbitraje</a><span>/</span><a href="arbitraje.html">Arbitraje</a><span>/</span><span>Calculadora</span></nav>
+        <h1>Calculadora de Costos Arbitrales</h1>
+        <p>Estimación referencial de honorarios y servicios arbitrales.</p>
+      </div>
+    </header>
+    <section class="section">
+      <div class="container calculator-layout">
+        <div class="calculator-panel">
+          <div class="calculator-panel__heading">
+            <span class="calculator-panel__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8M8 10h2M14 10h2M8 14h2M14 14h2M8 18h2M14 18h2"/></svg></span>
+            <div><p class="eyebrow">Centro de Arbitraje</p><h2>Calcule su estimación</h2></div>
+          </div>
+          <div class="calculator-tabs" role="tablist" aria-label="Tipo de cálculo">
+            <button class="calculator-tab is-active" type="button" role="tab" aria-selected="true" data-calculator-tab="costs">Costos Arbitrales</button>
+            <button class="calculator-tab" type="button" role="tab" aria-selected="false" data-calculator-tab="emergency">Árbitro de Emergencia</button>
+          </div>
+          <form data-arbitration-calculator>
+            <input type="hidden" name="calculationType" value="costs">
+            <div class="form-field" data-costs-only><label for="calculator-service">Tipo de arbitraje</label><select id="calculator-service" name="service"><option value="single">Árbitro Único</option><option value="panel">Tribunal Arbitral Colegiado</option><option value="accelerated-single">Arbitraje Acelerado — 1 Árbitro</option><option value="accelerated-panel">Arbitraje Acelerado — 3 Árbitros</option></select></div>
+            <div class="form-field"><label for="calculator-amount">Monto de la cuantía</label><input id="calculator-amount" name="amount" type="number" min="0" step="0.01" inputmode="decimal" placeholder="Ej.: 100000.00" required></div>
+            <div class="calculator-currency-row"><div class="form-field"><label for="calculator-currency">Moneda</label><select id="calculator-currency" name="currency"><option value="PEN">S/ Soles</option><option value="USD">USD Dólares</option></select></div><div class="form-field" data-exchange-rate><label for="calculator-exchange-rate">Tasa de cambio</label><input id="calculator-exchange-rate" name="exchangeRate" type="number" min="0.01" step="0.001" value="3.365" inputmode="decimal"><small>1 USD = S/ 3.365</small></div></div>
+            <button class="button" type="submit">Calcular costos</button>
+          </form>
+        </div>
+        <aside class="calculator-result" aria-live="polite" data-calculator-result>
+          <div data-calculator-result-body><p class="eyebrow">Resultado</p><h2>Ingrese una cuantía</h2><p>Seleccione el tipo de cálculo e ingrese la cuantía para ver una estimación.</p></div>
+          <button class="button calculator-download" type="button" data-download-calculation hidden>Descargar PDF</button>
+        </aside>
+      </div>
+      <div class="container calculator-disclaimer"><p><strong>Importante:</strong> el resultado es referencial, no incluye IGV y no reemplaza la liquidación oficial del Centro de Arbitraje del Colegio de Abogados de Ucayali. Para una cotización aplicable a un caso concreto, comuníquese con el Centro.</p></div>
+    </section>
+  </main>
+  <div data-site-footer></div>
+</body>
+</html>

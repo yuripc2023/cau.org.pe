@@ -710,8 +710,126 @@ h3 {
   margin: 0;
 }
 
+.document-card .document-icon {
+  color: var(--gold-dark);
+  background: #fff7e7;
+}
+
+.document-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
 .document-card h3 {
   margin: 0;
+}
+
+.tariff-card {
+  width: 100%;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.tariff-modal {
+  width: min(1080px, calc(100% - 28px));
+  max-height: min(780px, calc(100vh - 40px));
+  padding: 0;
+  overflow-y: auto;
+  color: var(--ink);
+  background: var(--white);
+  border: 0;
+  border-radius: var(--radius);
+  box-shadow: 0 24px 70px rgba(7, 26, 61, 0.28);
+}
+
+.tariff-modal::backdrop {
+  background: rgba(7, 26, 61, 0.62);
+}
+
+.tariff-modal__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 30px 34px 22px;
+  background: var(--navy);
+}
+
+.tariff-modal__header h2 { color: var(--white); margin: 0; }
+.tariff-modal__header .eyebrow { margin: 0 0 8px; color: var(--gold); }
+
+.tariff-modal__close {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+  color: var(--white);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 50%;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.tariff-modal__intro,
+.tariff-modal__source { margin: 24px 34px; }
+
+.tariff-accordion { margin: 0 34px; border-top: 1px solid var(--line); }
+.tariff-accordion details { border-bottom: 1px solid var(--line); }
+.tariff-accordion summary { display: flex; align-items: center; justify-content: space-between; padding: 17px 0; color: var(--navy); font-weight: 750; cursor: pointer; list-style: none; }
+.tariff-accordion summary::-webkit-details-marker { display: none; }
+.tariff-accordion summary::after { content: "+"; color: var(--gold-dark); font-size: 1.45rem; font-weight: 400; }
+.tariff-accordion details[open] summary::after { content: "−"; }
+.tariff-content { padding: 0 0 18px; color: var(--muted); }
+.tariff-content p { margin: 0; }
+.tariff-table-wrap { overflow-x: auto; margin-bottom: 16px; }
+.tariff-table { width: 100%; min-width: 850px; border-collapse: collapse; color: var(--ink); font-size: 0.88rem; text-align: center; }
+.tariff-table th { padding: 13px 10px; color: var(--white); background: #3e3e41; font-weight: 700; }
+.tariff-table td { padding: 12px 10px; border: 1px solid var(--line); vertical-align: middle; }
+.tariff-table tbody tr:nth-child(even) { background: #f7f8fa; }
+.tariff-table--compact { min-width: 560px; }
+.tariff-table--accelerated { min-width: 760px; }
+.tariff-table--emergency { min-width: 760px; }
+.tariff-note { font-size: 0.9rem; line-height: 1.6; }
+.tariff-formula { padding: 17px; color: var(--navy); background: var(--cream); border-left: 4px solid var(--gold); font-weight: 750; }
+.tariff-notes { margin: 16px 0 0; padding-left: 20px; }
+.tariff-notes li + li { margin-top: 8px; }
+
+.calculator-layout { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.75fr); gap: 28px; align-items: stretch; }
+.calculator-panel, .calculator-result { padding: 34px; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 10px 30px rgba(7, 26, 61, 0.06); }
+.calculator-panel { background: var(--white); }
+.calculator-panel__heading { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+.calculator-panel__heading h2, .calculator-result h2 { margin: 0; }
+.calculator-tabs { display: flex; gap: 8px; margin-bottom: 24px; padding: 5px; background: #f3f5f8; border-radius: 10px; }
+.calculator-tab { flex: 1; min-height: 43px; padding: 8px 12px; color: var(--navy); background: transparent; border: 0; border-radius: 7px; font: inherit; font-size: 0.88rem; font-weight: 750; cursor: pointer; }
+.calculator-tab.is-active { color: var(--white); background: var(--navy); box-shadow: 0 4px 10px rgba(7, 26, 61, 0.15); }
+.calculator-panel__icon { width: 54px; height: 54px; display: grid; flex: 0 0 auto; place-items: center; color: var(--gold-dark); background: #fff7e7; border-radius: 16px; }
+.calculator-panel__icon svg { width: 28px; height: 28px; }
+.calculator-panel .eyebrow, .calculator-result .eyebrow { margin: 0 0 7px; }
+.form-field { margin-bottom: 20px; }
+.form-field label { display: block; margin-bottom: 8px; color: var(--navy); font-weight: 750; }
+.form-field input, .form-field select { width: 100%; min-height: 48px; padding: 11px 13px; color: var(--ink); background: var(--white); border: 1px solid var(--line); border-radius: 8px; font: inherit; }
+.form-field small { display: block; margin-top: 5px; color: var(--muted); font-size: 0.77rem; }
+.calculator-currency-row { display: grid; grid-template-columns: 0.75fr 1fr; gap: 14px; align-items: start; }
+.calculator-currency-row .form-field { display: flex; flex-direction: column; gap: 0; margin-bottom: 0; }
+.calculator-panel form > .button { width: 100%; margin-top: 20px; }
+.calculator-result { color: rgba(255, 255, 255, 0.86); background: var(--navy); }
+.calculator-result h2 { color: var(--white); }
+.calculator-result .eyebrow { color: var(--gold); }
+.calculator-result__amount { margin: 18px 0 9px; color: var(--gold); font-family: Georgia, "Times New Roman", serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; line-height: 1.1; }
+.calculator-result__detail { margin-top: 22px; padding-top: 18px; border-top: 1px solid rgba(255, 255, 255, 0.22); }
+.calculator-result__detail p { margin: 7px 0; }
+.calculator-download { width: 100%; margin-top: 24px; color: var(--navy); background: var(--gold); }
+.calculator-disclaimer { margin-top: 26px; }
+.calculator-disclaimer p { margin: 0; padding: 18px 22px; color: var(--muted); background: #f5f7fa; border-left: 4px solid var(--gold); }
+
+@media (max-width: 760px) {
+  .tariff-modal__header { padding: 24px 22px 18px; }
+  .tariff-modal__intro,
+  .tariff-modal__source { margin: 20px 22px; }
+  .tariff-accordion { margin: 0 22px; }
 }
 
 .contact-grid {
@@ -1006,9 +1124,12 @@ h3 {
   }
 
   .form-grid,
-  .footer-main {
+  .footer-main,
+  .calculator-layout {
     grid-template-columns: 1fr;
   }
+
+  .calculator-currency-row { grid-template-columns: 1fr; gap: 0; }
 }
 
 @media (max-width: 430px) {
