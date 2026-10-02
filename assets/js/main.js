@@ -14,7 +14,7 @@
       <li class="nav-item${active}">
         <button class="dropdown-toggle" type="button" aria-expanded="false">${label}</button>
         <ul class="dropdown-menu">
-          ${links.map((link) => `<li><a href="${link.href}">${link.label}</a></li>`).join("")}
+          ${links.map((link) => `<li><a${link.highlight ? ' class="dropdown-link-highlight"' : ""} href="${link.href}">${link.label}</a></li>`).join("")}
         </ul>
       </li>`;
   };
@@ -46,6 +46,7 @@
               ${navItem("publicaciones.html", "Publicaciones", "publicaciones")}
               ${dropdown("Enlaces", "enlaces", [
                 { href: "enlaces.html", label: "Enlaces de interés", key: "enlaces" },
+                { href: "https://aplicativo.cau.org.pe/login", label: "Mesa de partes", key: "", highlight: true },
                 { href: "https://aplicativo.cau.org.pe/", label: "Sistema", key: "" },
                 { href: "https://aplicativo.cau.org.pe/consulta-habilidad/20199186290", label: "Consulta de Habilidad", key: "" },
                 { href: "#", label: "Biblioteca", key: "" },
@@ -63,7 +64,7 @@
   if (footer) {
     footer.innerHTML = `
       <footer class="site-footer">
-        <div class="container footer-main">
+        <div class="container footer-main${footer.hasAttribute("data-footer-iso") ? " footer-main-with-iso" : ""}">
           <div class="footer-brand">
             <img src="assets/img/cau/logo.png" alt="Emblema del Colegio de Abogados de Ucayali" width="120" height="120" loading="lazy">
             <p>Institución profesional autónoma al servicio de sus agremiados y de la sociedad ucayalina.</p>
@@ -94,6 +95,15 @@
               <li><a href="mailto:centrodearbitraje@cau.org.pe">centrodearbitraje@cau.org.pe</a></li>
             </ul>
           </div>
+          ${footer.hasAttribute("data-footer-iso") ? `
+            <div>
+              <h2>ISOS</h2>
+              <div class="footer-iso" role="group" aria-label="Sellos ISO">
+                <img src="assets/img/cau/ISO-CAU-27001.png" alt="ISO 27001" loading="lazy">
+                <img src="assets/img/cau/iso-CAU-90012015.webp" alt="ISO 9001:2015" loading="lazy">
+                <img src="assets/img/cau/iso-CAU-370012016.webp" alt="ISO 37001:2016" loading="lazy">
+              </div>
+            </div>` : ""}
         </div>
         <div class="footer-bottom">
           <div class="container">© <span data-current-year></span> Ilustre Colegio de Abogados de Ucayali</div>

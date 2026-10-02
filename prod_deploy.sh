@@ -1,11 +1,10 @@
 #!/bin/bash
-# el archivo se llama:
-# deploy.sh
+# Uso: ./prod_deploy.sh (requiere una sesion AWS activa, por ejemplo: aws login).
 
 set -euo pipefail
 
 declare -A sites=(
-  ["cau.org.pe"]="s3://XXX|XXXXXX|XXXXX"
+  ["cau.org.pe"]="s3://cau.org.pe/|E63OM53ZBCO1W"
 )
 
 # Asegura que el script se ejecute siempre desde la raiz del proyecto
@@ -20,10 +19,8 @@ handle_error() {
 for site in "${!sites[@]}"; do
   echo "Desplegando sitio: $site"
 
-  IFS='|' read -r s3_bucket access_key_id secret_access_key cloudfront_distribution_id <<< "${sites[$site]}"
+  IFS='|' read -r s3_bucket cloudfront_distribution_id <<< "${sites[$site]}"
 
-  export AWS_ACCESS_KEY_ID="$access_key_id"
-  export AWS_SECRET_ACCESS_KEY="$secret_access_key"
   export AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION:-us-east-1}"
 
   echo "Bucket S3: $s3_bucket"
@@ -31,22 +28,25 @@ for site in "${!sites[@]}"; do
 
   aws s3 cp "$PROJECT_ROOT/" "$s3_bucket" \
     --recursive \
-    --acl public-read \
-    --exclude ".git/*" \
-    --exclude ".agents/*" \
-    --exclude ".codex/*" \
-    --exclude "deploy.sh" \
-    --exclude "MAPEO-SITIO.md" \
+    --cache-control "max-age=0, must-revalidate" \
+    --exclude "*" \
+    --include "*.html" \
+    --include "assets/*" \
+    --include "robots.txt" \
+    --include "sitemap.xml" \
+    --exclude ".*" \
+    --exclude "*/.*" \
+    --no-progress \
     || handle_error "No se pudieron subir los archivos al bucket S3 para $site."
 
-  cloudfront_distribution_id="${cloudfront_distribution_id:-${CLOUDFRONT_DISTRIBUTION_ID:-}}"
+  cloudfront_distribution_id="${CLOUDFRONT_DISTRIBUTION_ID:-$cloudfront_distribution_id}"
   if [ -n "$cloudfront_distribution_id" ]; then
     if aws cloudfront create-invalidation \
       --distribution-id "$cloudfront_distribution_id" \
       --paths "/*"; then
       echo "Invalidacion de CloudFront solicitada para $site."
     else
-      echo "Advertencia: no se pudo invalidar CloudFront para $site. Los archivos ya fueron subidos a S3."
+      handle_error "Los archivos se subieron a S3, pero fallo la invalidacion de CloudFront para $site."
     fi
   else
     echo "CloudFront no fue invalidado porque no se configuro CLOUDFRONT_DISTRIBUTION_ID."
