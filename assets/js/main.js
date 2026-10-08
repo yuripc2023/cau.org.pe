@@ -216,6 +216,17 @@
       { min: 1800000, max: 3600000, base: 47049, rate: 0.0118, cap: 68289, label: "Escala G" },
       { min: 3600000, max: Infinity, base: 67666, rate: 0.0058, cap: 623014, label: "Escala H" }
     ];
+    // Tarifario: hoja GASTOS ADMINISTRATIVOS, importes sin IGV.
+    const administrationBrackets = [
+      { min: 18000, max: 36000, base: 3300, rate: 0.0274, cap: 3793.2, label: "Escala A" },
+      { min: 36000, max: 72000, base: 3379, rate: 0.0377, cap: 4236.2, label: "Escala B" },
+      { min: 72000, max: 108000, base: 4265, rate: 0.0329, cap: 5449.4, label: "Escala C" },
+      { min: 108000, max: 180000, base: 5276, rate: 0.0228, cap: 6917.6, label: "Escala D" },
+      { min: 180000, max: 360000, base: 5574, rate: 0.0176, cap: 8742, label: "Escala E" },
+      { min: 360000, max: 1800000, base: 14896, rate: 0.0043, cap: 21088, label: "Escala F" },
+      { min: 1800000, max: 3600000, base: 27071, rate: 0.0031, cap: 32651, label: "Escala G" },
+      { min: 3600000, max: Infinity, base: 17599, rate: 0.0025, cap: 236238, label: "Escala H" }
+    ];
     const emergencyBrackets = [
       [1000000, 8000], [5000000, 12000], [10000000, 18000], [15000000, 22500], [20000000, 30000], [25000000, 37500], [30000000, 45000], [35000000, 52500], [40000000, 60000], [45000000, 67500], [50000000, 75101], [55000000, 82500], [60000000, 90123], [65000000, 97500], [70000000, 105146.25], [100000000, 150000], [Infinity, 170000]
     ];
@@ -249,6 +260,12 @@
       if (calculationType.value === "costs" && service === "single") { const result = bracketFee(amount, singleBrackets); fee = result.fee; title = "Árbitro Único"; detail = result.label; items = [["Honorario arbitral", fee]]; }
       if (calculationType.value === "costs" && service === "panel") { const result = bracketFee(amount, panelBrackets); fee = result.fee; title = "Tribunal Arbitral Colegiado"; detail = result.label; items = [["Honorarios del tribunal", fee]]; }
       if (calculationType.value === "costs" && service.startsWith("accelerated-")) { const accelerated = amount <= 20000 ? [5800, 5800, 17550, "Escala A"] : amount <= 50000 ? [7800, 7800, 23400, "Escala B"] : null; if (!accelerated) { calculatorDownload.hidden = true; calculatorResult.innerHTML = '<p class="eyebrow">Resultado</p><h2>Cuantía fuera de rango</h2><p>La tabla de Arbitraje Acelerado publicada cubre cuantías de hasta S/ 50,000.00.</p>'; return; } const arbitratorService = service === "accelerated-panel" ? accelerated[2] : accelerated[1]; fee = accelerated[0] + arbitratorService; title = service === "accelerated-panel" ? "Arbitraje Acelerado — 3 Árbitros" : "Arbitraje Acelerado — 1 Árbitro"; detail = accelerated[3]; items = [["Gastos administrativos", accelerated[0]], ["Servicio de arbitraje", arbitratorService]]; }
+      if (calculationType.value === "costs" && (service === "single" || service === "panel")) {
+        // Solo el excedente sobre S/ 18,000 incrementa la tarifa base de la escala A.
+        const administration = bracketFee(Math.max(amount, 18000), administrationBrackets);
+        items.push(["Gastos administrativos", administration.fee]);
+        fee += administration.fee;
+      }
       breakdown = items.map(([label, value]) => `<p><strong>${label}:</strong> ${display(value)}</p>`).join("");
       lastCalculation = { title, detail, inputAmount, amount, currencyCode, exchangeRate, fee, items };
       calculatorResult.innerHTML = `<p class="eyebrow">Resultado referencial</p><h2>${title}</h2><p class="calculator-result__amount">${display(fee)}</p><p>Total estimado sin IGV</p><div class="calculator-result__detail"><p><strong>Cuantía:</strong> ${formatMoney(inputAmount, currencyCode)}</p><p><strong>Aplicación:</strong> ${detail}</p>${breakdown}${currencyCode === "USD" ? `<p><strong>Equivalente:</strong> ${penDisplay(fee)}</p>` : ""}</div>`;
