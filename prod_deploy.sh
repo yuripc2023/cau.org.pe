@@ -1,5 +1,5 @@
 #!/bin/bash
-# Uso: ./prod_deploy.sh (requiere una sesion AWS activa, por ejemplo: aws login).
+# Uso: ./prod_deploy.sh (inicia aws login si la sesion no esta activa).
 
 set -euo pipefail
 
@@ -16,12 +16,26 @@ handle_error() {
   exit 1
 }
 
+command -v aws >/dev/null 2>&1 \
+  || handle_error "AWS CLI no esta instalado o no se encuentra en PATH."
+
+export AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION:-us-east-1}"
+
+echo "Validando sesion AWS..."
+if ! aws sts get-caller-identity --no-cli-pager >/dev/null 2>&1; then
+  echo "No se pudo validar la sesion AWS. Iniciando aws login..."
+  aws login \
+    || handle_error "No se completo el login de AWS. No se subieron archivos."
+
+  aws sts get-caller-identity --no-cli-pager >/dev/null \
+    || handle_error "La sesion AWS sigue sin estar disponible despues del login. No se subieron archivos."
+fi
+echo "Sesion AWS validada."
+
 for site in "${!sites[@]}"; do
   echo "Desplegando sitio: $site"
 
   IFS='|' read -r s3_bucket cloudfront_distribution_id <<< "${sites[$site]}"
-
-  export AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION:-us-east-1}"
 
   echo "Bucket S3: $s3_bucket"
   echo "Region AWS: $AWS_DEFAULT_REGION"
