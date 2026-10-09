@@ -99,9 +99,9 @@
             <div>
               <h2>ISOS</h2>
               <div class="footer-iso" role="group" aria-label="Sellos ISO">
-                <img src="assets/img/cau/ISO-CAU-27001.png" alt="ISO 27001" loading="lazy">
-                <img src="assets/img/cau/iso-CAU-90012015.webp" alt="ISO 9001:2015" loading="lazy">
-                <img src="assets/img/cau/iso-CAU-370012016.webp" alt="ISO 37001:2016" loading="lazy">
+                <img src="assets/img/cau/isos.jpg" alt="ISO 27001" loading="lazy">
+                <img src="assets/img/cau/isos.jpg" alt="ISO 9001:2015" loading="lazy">
+                <img src="assets/img/cau/isos.jpg" alt="ISO 37001:2016" loading="lazy">
               </div>
             </div>` : ""}
         </div>
@@ -268,7 +268,7 @@
       }
       breakdown = items.map(([label, value]) => `<p><strong>${label}:</strong> ${display(value)}</p>`).join("");
       lastCalculation = { title, detail, inputAmount, amount, currencyCode, exchangeRate, fee, items };
-      calculatorResult.innerHTML = `<p class="eyebrow">Resultado referencial</p><h2>${title}</h2><p class="calculator-result__amount">${display(fee)}</p><p>Total estimado sin IGV</p><div class="calculator-result__detail"><p><strong>Cuantía:</strong> ${formatMoney(inputAmount, currencyCode)}</p><p><strong>Aplicación:</strong> ${detail}</p>${breakdown}${currencyCode === "USD" ? `<p><strong>Equivalente:</strong> ${penDisplay(fee)}</p>` : ""}</div>`;
+      calculatorResult.innerHTML = `<p class="eyebrow">Resultado referencial</p><h2>Costo total estimado</h2><p class="calculator-result__amount">${display(fee)}</p><p>Sin IGV · Incluye ${calculationType.value === "emergency" ? "honorarios y servicio de arbitraje de emergencia" : "honorarios o servicio de arbitraje y gastos administrativos"}.</p><div class="calculator-result__detail"><p><strong>Tipo de arbitraje:</strong> ${title}</p><p><strong>Cuantía:</strong> ${formatMoney(inputAmount, currencyCode)}</p><p><strong>Aplicación:</strong> ${detail}</p>${breakdown}${currencyCode === "USD" ? `<p><strong>Equivalente:</strong> ${penDisplay(fee)}</p>` : ""}</div>`;
       calculatorDownload.hidden = false;
     });
     calculatorDownload.addEventListener("click", () => {
