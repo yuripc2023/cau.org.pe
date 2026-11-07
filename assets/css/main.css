@@ -180,6 +180,30 @@ h3 {
   color: var(--gold);
 }
 
+.nav-link-statute {
+  color: var(--gold);
+  background: rgba(138, 200, 225, 0.08);
+  border-radius: 6px;
+  box-shadow: inset 0 0 0 1px rgba(138, 200, 225, 0.28);
+}
+
+.nav-link-statute:hover,
+.nav-link-statute.active {
+  background: rgba(138, 200, 225, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(138, 200, 225, 0.55);
+}
+
+.statute-viewer {
+  display: block;
+  width: 100%;
+  height: 80vh;
+  min-height: 480px;
+  margin-top: 24px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--cream);
+}
+
 .dropdown-toggle::after {
   content: "";
   width: 6px;
@@ -1126,7 +1150,7 @@ h3 {
   pointer-events: auto;
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 1200px) {
   .nav-toggle {
     display: block;
   }

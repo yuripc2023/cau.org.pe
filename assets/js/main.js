@@ -3,9 +3,9 @@
 
   const currentPage = document.body.dataset.page || "";
 
-  const navItem = (href, label, key) => {
+  const navItem = (href, label, key, extraClass = "") => {
     const active = currentPage === key ? " active" : "";
-    return `<li><a class="nav-link${active}" href="${href}">${label}</a></li>`;
+    return `<li><a class="nav-link${extraClass ? ` ${extraClass}` : ""}${active}" href="${href}">${label}</a></li>`;
   };
 
   const dropdown = (label, key, links) => {
@@ -39,6 +39,7 @@
                 { href: "quienes-somos.html", label: "Quiénes somos", key: "quienes-somos" },
                 { href: "junta-directiva.html", label: "Junta directiva", key: "junta-directiva" }
               ])}
+              ${navItem("estatuto.html", "Estatuto", "estatuto", "nav-link-statute")}
               ${dropdown("Colegiatura", "colegiatura", [
                 { href: "requisitos-para-colegiarse.html", label: "Requisitos para colegiarse", key: "requisitos-colegiatura" },
                 { href: "requisitos-para-fondos-intangibles.html", label: "Fondos intangibles", key: "fondos-intangibles" }
